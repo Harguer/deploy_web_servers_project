@@ -1,0 +1,52 @@
+---
+- name: Create gce webserver instance
+  hosts: localhost
+  connection: local
+  gather_facts: True
+
+  vars:
+    service_account_email: davidsg@ultimate-figure-221821.iam.gserviceaccount.com
+    credentials_file: ultimate-figure-221821-109c498724d5.json
+    project_id: ultimate-figure-221821
+    instance_names: web1,web2,web3
+    machine_type: n1-standard-1
+    image: centos-7
+
+  tasks:
+  - name: Remove firewall rule to alow http trafic
+    gce_net:
+      name: default
+      fwname: "my-http-fw-rule"
+      allowed: tcp:80
+      state: absent
+      src_range: "0.0.0.0/0"
+      target_tags: "http-server"
+      service_account_email: "{{ service_account_email }}"
+      credentials_file: "{{ credentials_file }}"
+      project_id: "{{ project_id }}"
+
+  - name: Remove Instances running
+    gce:
+      instance_names: "{{ instance_names }}"
+      machine_type: "{{ machine_type }}"
+      image: "{{ image }}"
+      state: absent
+      preemptible: True
+      tags: http-server,https-server
+      service_account_email: "{{ service_account_email }}"
+      credentials_file: "{{ credentials_file }}"
+      project_id: "{{ project_id }}"
+      zone: us-east1-b
+
+  - name: Remove gce load balancer
+    gce_lb:
+      name: lbserver
+      state: absent
+      region: us-east1
+      members: ['us-east1-b/web1','us-east1-b/web2','us-east1-b/web3']
+      httphealthcheck_name: myhc
+      httphealthcheck_port: 80
+      httphealthcheck_path: "/"
+      service_account_email: "{{ service_account_email }}"
+      credentials_file: "{{ credentials_file }}"
+      project_id: "{{ project_id }}"

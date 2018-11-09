@@ -1,0 +1,9 @@
+---
+- name: Set hostname
+  hosts: servers
+  tasks:
+  - name: Add Satellite host
+    lineinfile:
+      path: /etc/hosts
+      line: '10.193.140.52 srv5.tsmx.lab srv5'
+      state: present

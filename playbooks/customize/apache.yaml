@@ -1,0 +1,5 @@
+---
+- name: setup apache on webservers
+  hosts: vms
+  roles:
+    - apache_lab

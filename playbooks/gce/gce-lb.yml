@@ -1,0 +1,22 @@
+---
+- name: Play to create gce load balancing instance
+#  include_vars: vars/gce_vars.yml
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars_files:
+    - vars/gce_vars.yml
+  
+  tasks:
+    - name: Create gce load balancer
+      gce_lb:
+        name: lbserver
+        state: present
+        region: us-east1
+        members: ['us-east1-b/web1','us-east1-b/web2','us-east1-b/web3']
+        httphealthcheck_name: myhc
+        httphealthcheck_port: 80
+        httphealthcheck_path: "/"
+        service_account_email: "{{ service_account_email }}"
+        credentials_file: "{{ credentials_file }}"
+        project_id: "{{ project_id }}"

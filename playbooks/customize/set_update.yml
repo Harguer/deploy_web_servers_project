@@ -1,0 +1,76 @@
+---
+- name: Setting up machine against Red Hat Satellite 6.x
+  hosts: vms
+  tasks:
+    - name: Include the vars file
+      include_vars: vars/vars.yml
+
+    - name: Install the consumer RPM from the Satellite Server
+      shell: "rpm -Uvh http://srv5.tsmx.lab/pub/katello-ca-consumer-latest.noarch.rpm"
+
+    - name: Register machine
+      redhat_subscription:
+        state: present
+        username: admin
+        password: "{{ password }}"
+        pool: "Employee SKU"
+     
+    - name: Disable all repos
+      shell: "subscription-manager repos --disable=*"
+
+    - name: Enable RHEL7 and Satellite tools repos
+      shell: "subscription-manager repos --enable rhel-7-server-rpms --enable rhel-7-server-satellite-tools-6.4-rpms"
+
+    - name: Install the required packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - katello-agent
+        - katello-host-tools-tracer
+
+    - name: Enabling and starting services
+      service:
+        name: "{{ item }}"
+        enabled: yes
+        state: started
+      with_items:
+        - goferd
+        - rhsmcertd
+    
+    - name: Katello package upload
+      shell: katello-package-upload
+
+    - name: Katello tracer upload
+      shell: katello-tracer-upload
+
+    - name: Upgrade all packages
+      yum:
+        name: "*"
+        state: latest
+      register: systemupgrade
+
+    - set_fact:
+        real_ansible_host: "{{ ansible_host }}"
+
+    - name: Restart machine
+      shell: sleep 3 && shutdown -r +1 "Ansible packages upgrade triggered"
+      async: 1
+      poll: 0
+      ignore_errors: true
+
+    - name: Wait for hosts to go down
+      local_action:
+        wait_for host={{ real_ansible_host }}
+        port=22 state=absent delay=1 timeout=120
+      become: false
+
+    - name: Wait for hosts to come back up
+      local_action:
+        wait_for host={{ real_ansible_host }}
+        port=22 state=started delay=30 timeout=120
+      become: false
+
+    - name: Show host
+      debug:
+        msg: "{{ ansible_host }}"

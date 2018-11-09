@@ -1,0 +1,7 @@
+- name: Set hostname
+  hosts: servers
+  vars:
+    hostname: vm-*.tsmx.lab
+  tasks:
+    - name: set the friendly hostname
+      hostname: name={{ hostname.replace('*', ansible_all_ipv4_addresses[0].split('.')[3]) }}
