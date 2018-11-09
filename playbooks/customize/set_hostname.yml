@@ -1,3 +1,4 @@
+#name of the VM will be picked up from the ip address last octet xxx.xxx.xxx.XXX
 - name: Set hostname
   hosts: servers
   vars:

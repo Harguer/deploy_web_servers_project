@@ -5,9 +5,9 @@
   gather_facts: no
 
   vars: 
-    service_account_email: davidsg@ultimate-figure-221821.iam.gserviceaccount.com
-    credentials_file: ultimate-figure-221821-109c498724d5.json
-    project_id: ultimate-figure-221821
+    service_account_email: xxxxx@ultimate-figure-221821.iam.gserviceaccount.com
+    credentials_file: ultimate-figure-xxxx.json
+    project_id: ultimate-figure-xxxx
     machine_type: n1-standard-1
     image: centos-7
 
@@ -21,4 +21,4 @@
       credentials_file: "{{ credentials_file }}"
       project_id: "{{ project_id }}"
       zone: us-east1-b
-      metadata: '{"sshKeys":"midgardo:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC2n02XgOefPx5N3SlwJjQfvLKShcMF21CsFeYn5EUdhr3tz8S1kA0wVEGivaNqdvU8vn8VCqmAy+ZoKoM+8aIWT8O8DpKmtZyb5k7elROF1SSCU2orJbMmpxffdVtJN4VxvZQ5VVn89gPmt0t1r5T2TtEiOQ2tIxxFpQRWbSVf70kPhLm6xkH7LJMMnd+QdGASNaTVfwCpDrJeA0OGkSjUBp2C/fxSfAXik/BZzZcHI/w+Ddgp6X3TXXjVUBsRrksAgjehI6y7zU76cRI2preHGAI0FGs5gaH+3Kyh5R+hVrDi2IkZQaCh5XD/1cFTJdgbVd9V0O0QigwBNETJ2mUawX1ZlFmGs5qKIFVjzLPCcWjSK3ryfzhwAT1NlFMxohIHLe/K/a2vsU2ISRRAFDDvyeAlByicGnwtppwtERkkENZgwWzBXUjZuVQNBD2KrffVuNM/mv7L69OtHcuMu4p5gf0JV8lBGQFls4yg+/J39Hg+sVXn1oEocKDl+tIAOCVNXy+F50YlJKKqTneCRVC3WBPyWfcrcUHA3QJ7TVMa+++Glte6XTuNw+XdiIAc222lLYMEae3qheaxlUF2D3Wdboe1OYohXkj67ExoLYuhp6pUz9/23rSHc07jHkPtECE7FmN5Ca1ogEatZqsO9tYfupIfu+PCUWGqavQPbaKg8Q== davidsg@srv3.tsmx.lab"}'
+      metadata: '{"sshKeys":"mygmailuser:ssh-rsa ...."}'

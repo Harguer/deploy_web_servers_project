@@ -1,3 +1,4 @@
+#set an ip address based on the profile file called ifcfg-ethX.txt
 - name: Set IPv4
   hosts: servers
   tasks:

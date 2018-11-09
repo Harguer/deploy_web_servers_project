@@ -1,4 +1,4 @@
-service_account_email: davidsg@ultimate-figure-221821.iam.gserviceaccount.com
-credentials_file: ultimate-figure-221821-109c498724d5.json
-project_id: ultimate-figure-221821
+service_account_email: myuser@ultimate-figure-xxxx...gserviceaccount.com
+credentials_file: ultimate-figure-xxxxx.json
+project_id: ultimate-figure-xxxxx
 

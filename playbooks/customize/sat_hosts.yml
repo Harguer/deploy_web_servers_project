@@ -1,9 +1,10 @@
 ---
+#replace line, example: 10.10.10.10 my-satellite.lab my-satellite -- > REMOVE this line
 - name: Set hostname
   hosts: servers
   tasks:
   - name: Add Satellite host
     lineinfile:
       path: /etc/hosts
-      line: '10.193.140.52 srv5.tsmx.lab srv5'
+      line: 'IP hostname_fqdn hostame' 
       state: present

@@ -1,3 +1,5 @@
+#go to line key and change the path for your rsa pub key
+#for new keys, run: ssh-keygen -t rsa -b 4096 -f id_rsa_ansible
 - name: Set authorized key
   hosts: all
   tasks:
