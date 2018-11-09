@@ -22,6 +22,7 @@ Create the following folder structure on your home dir work.
 
 Place the folders and files as follow:
 
+```
 +--- ansible.cfg
 +--- apache.yaml
 +--- apache_lab
@@ -59,7 +60,7 @@ Place the folders and files as follow:
 |   +--- gce_vars.yml
 |   +--- vars.yml
 
-
+```
 
 
 ### Installing
