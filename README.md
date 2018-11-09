@@ -1,6 +1,6 @@
 # Deploy web servers on gce
 
-One Paragraph of project description goes here
+Set of yaml scripts to setup 3 webservers and a load balancer on google cloud.
 
 ## Getting Started
 
